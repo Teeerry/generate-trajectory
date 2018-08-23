@@ -1,6 +1,7 @@
 #include "ros/ros.h"
 #include "actionlib/server/simple_action_server.h"
 #include "generate_traj/TrajAction.h"
+#include "plan_and_run/demo_application.h"
 
 class TrajAction
 {
@@ -14,6 +15,10 @@ protected:
   // create messages that are used to published feedback/result
   generate_traj::TrajFeedback feedback_;
   generate_traj::TrajResult result_;
+  // creating application from plan_and_run
+  plan_and_run::DemoApplication application;
+  plan_and_run::DescartesTrajectory traj;
+  plan_and_run::DescartesTrajectory output_path;
 
 public:
 
@@ -66,6 +71,29 @@ public:
       // this sleep is not necessary, the sequence is computed at 1 Hz for demonstration purposes
       r.sleep();
     }
+    
+    // Try to figure out a way 
+    // avoid initialize every time in the callback function,
+    // but for now, we can keep this for test the generate function
+    ROS_INFO("Loading and initializing now!");
+    // loading parameters
+    application.loadParameters();
+    // initializing ros components
+    application.initRos();
+    // initializing descartes
+    application.initDescartes();
+
+    ROS_INFO("All is well! Everyone is happy! You can start planning now!");
+    // moving to home position
+    application.moveHome();
+    // generating trajectory
+    application.generateTrajectory(traj);
+    // planning robot path
+    application.planPath(traj,output_path);
+    // running robot path
+    application.runPath(output_path);
+    ros::Duration(10).sleep();
+    
 
     if(success)
     {

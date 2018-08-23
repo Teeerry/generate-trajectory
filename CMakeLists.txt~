@@ -11,9 +11,17 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
-  geometry_msgs
+  actionlib
   actionlib_msgs
   message_generation
+ 
+  descartes_core
+  descartes_planner
+  descartes_moveit
+  descartes_trajectory
+  moveit_ros_planning_interface
+  ur5_demo_descartes
+  
 )
 
 ## System dependencies are found with CMake's conventions

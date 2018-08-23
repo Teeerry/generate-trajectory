@@ -1,0 +1,38 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/tlluo36/catkin_ws/devel/include",
+                "/opt/ros/indigo/include",
+                "/home/tlluo36/catkin_ws/src/control_toolbox/include",
+                "/home/tlluo36/catkin_ws/src/roscon_2015/descartes/descartes_core/include",
+                "/home/tlluo36/catkin_ws/src/roscon_2015/descartes/descartes_moveit/include",
+                "/home/tlluo36/catkin_ws/src/roscon_2015/descartes/descartes_planner/include",
+                "/home/tlluo36/catkin_ws/src/roscon_2015/descartes/descartes_trajectory/include",
+                "/home/tlluo36/catkin_ws/src/roscon_2015/plan_and_run/include",
+                "/home/tlluo36/catkin_ws/src/generate_traj/include",
+                "/home/tlluo36/catkin_ws/src/industrial_core/industrial_robot_client/include",
+                "/home/tlluo36/catkin_ws/src/industrial_core/industrial_trajectory_filters/include",
+                "/home/tlluo36/catkin_ws/src/industrial_core/industrial_utils/include",
+                "/home/tlluo36/catkin_ws/src/roscon_2015/plan_and_run/include",
+                "/home/tlluo36/catkin_ws/src/python_bindings_tutorial/include",
+                "/home/tlluo36/catkin_ws/src/realtime_tools/include",
+                "/home/tlluo36/catkin_ws/src/robotiq/robotiq_gazebo/include",
+                "/home/tlluo36/catkin_ws/src/common_msgs/sensor_msgs/include",
+                "/home/tlluo36/catkin_ws/src/industrial_core/simple_message/include",
+                "/home/tlluo36/catkin_ws/src/roscon_2015/ur5_demo_descartes/include",
+                "/home/tlluo36/catkin_ws/src/universal_robot/ur_kinematics/include",
+                "/home/tlluo36/catkin_ws/src/usb_cam/include",
+                "/usr/include",
+                "/usr/include/eigen3"
+            ],
+            "name": "Linux",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}

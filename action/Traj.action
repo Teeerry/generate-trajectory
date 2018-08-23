@@ -4,6 +4,7 @@
 # goal definition
 float32[] x
 float32[] y 
+#float32[] z
 ---
 # result definition
 #int32[] sequence

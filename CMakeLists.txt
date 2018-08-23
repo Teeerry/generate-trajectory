@@ -10,11 +10,18 @@ project(generate_traj)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
-  actionlib
   std_msgs
-  geometry_msgs
+  actionlib
   actionlib_msgs
   message_generation
+  plan_and_run
+  descartes_core
+  descartes_planner
+  descartes_moveit
+  descartes_trajectory
+  moveit_ros_planning_interface
+  ur5_demo_descartes
+  
 )
 
 ## System dependencies are found with CMake's conventions

@@ -1,14 +1,15 @@
 # This is an action definition file, which has three parts: 
 # the goal, the result, and the feedback.
 
-#goal definition
+# goal definition
 float32[] x
 float32[] y 
+float32[] z
 ---
-#result definition
+# result definition
 #int32[] sequence
 int32 result
 ---
-#feedback
+# feedback
 int32[] sequence
 #int32 feedback

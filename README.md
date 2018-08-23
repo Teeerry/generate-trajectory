@@ -13,3 +13,13 @@ $ rosrun generate_traj traj_client.py 3 4 5
 $ roscore
 $ rosrun generate_traj simple_action_server.py
 $ rosrun generate_traj simple_action_client.py
+
+3. C++ server and Python client
+$ roscore
+$ rosrun generate_traj traj_action_server
+$ rosrun generate_traj traj_action_client.py
+
+4. simulate on the ur5
+$ roslaunch plan_and_run demo_setup.launch sim:=true
+$ roslaunch generate_traj demo_run.launch
+$ rosrun generate_traj traj_action_client.py
