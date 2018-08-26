@@ -2,7 +2,6 @@
 #include "actionlib/server/simple_action_server.h"
 #include "generate_traj/TrajAction.h"
 #include "plan_and_run/demo_application.h"
-
 class TrajAction
 {
 protected:
@@ -46,7 +45,7 @@ public:
 
     // Publish info to the console for the user
     // Test the goal
-    ROS_INFO("%s: Executing, creating fibonacci sequence of order %f with seeds %f, %f", action_name_.c_str(), goal->x[0], goal->y[0], goal->y[1]);
+    ROS_INFO("%s: Executing, starting for our goal ...... ", action_name_.c_str());
 
     // Start executing the action
     for(int i=1; i<=10; i++)
@@ -87,7 +86,65 @@ public:
     // moving to home position
     application.moveHome();
     // generating trajectory
-    application.generateTrajectory(traj);
+    EigenSTL::vector_Affine3d poses;
+    Eigen::Affine3d pose;
+    int i;
+    poses.clear();
+    for(i=0;i<goal->x.size();i++)
+    {
+      Eigen::Matrix3d rot;
+      rot <<0, 1, 0
+          ,1, 0, 0
+          ,0, 0, -1;
+
+      pose = Eigen::Translation3d(0 + goal->x[i],
+                                  0 + goal->y[i],
+                                  0 + goal->z[i]) * rot;
+
+      poses.push_back(pose);
+    }
+    ROS_INFO_STREAM("Trajectory with "<<poses.size()<<" points was generated");
+    ROS_INFO("Got the goal waypoints! Start planning now!");
+
+    using namespace plan_and_run;
+    using namespace descartes_core;
+    using namespace descartes_trajectory;
+    DescartesTrajectory traj;
+    // creating descartes trajectory points
+    traj.clear();
+    traj.reserve(poses.size());
+    for(unsigned int i = 0; i < poses.size(); i++)
+    {
+      const Eigen::Affine3d& pose = poses[i];
+
+      /*  Fill Code:
+      * Goal:
+      * - Create AxialSymetricPt objects in order to define a trajectory cartesian point with
+      *    rotational freedom about the tool's z axis.
+      *
+      * Hint:
+      * - The point can be constructed as follows:
+      *
+      *    new AxialSymmetricPt(Pose ,Increment, Free Axis)
+      *
+      * - The Pose can be found in the for loop's "pose" variable.
+      * - The Increment can be found in the "ORIENTATION_INCREMENT" global variable.
+      * - The Free Axis can be selected from the AxialSymmetricPt::FreeAxis::Z_AXIS enumeration constants.
+      *
+      */
+      //descartes_core::TrajectoryPtPtr pt = descartes_core::TrajectoryPtPtr(/*[ COMPLETE HERE*/);
+
+      descartes_core::TrajectoryPtPtr pt = descartes_core::TrajectoryPtPtr(
+          new descartes_trajectory::AxialSymmetricPt(pose,ORIENTATION_INCREMENT,
+                                                    descartes_trajectory::AxialSymmetricPt::FreeAxis::Z_AXIS,
+                                                      descartes_core::TimingConstraint(0.5) ) );
+
+      // saving points into trajectory
+      traj.push_back(pt);
+    }
+    ROS_INFO("Generate traj completed!");
+    //application.generateTrajectory(traj);
+
     // planning robot path
     application.planPath(traj,output_path);
     // running robot path

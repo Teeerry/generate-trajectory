@@ -22,11 +22,19 @@ del goal.x [:]
 goal.x.append(0.5)
 goal.x.append(0.5)
 goal.x.append(0.5)
+goal.x.append(0.5)
 
 del goal.y [:]
 goal.y.append(0.3)
+goal.y.append(0.35)
 goal.y.append(0.4)
-goal.y.append(0.5)
+goal.y.append(0.45)
+
+del goal.z [:]
+goal.z.append(0.3)
+goal.z.append(0.3)
+goal.z.append(0.3)
+goal.z.append(0.3)
 
 # Send the goal
 client.send_goal(goal, feedback_cb=feedback_cb)
