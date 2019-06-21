@@ -97,9 +97,9 @@ public:
           ,1, 0, 0
           ,0, 0, -1;
 
-      pose = Eigen::Translation3d(goal->offset[0] + goal->x[i],
-                                  goal->offset[1] + goal->y[i],
-                                  goal->offset[2] + goal->z[i]) * rot;
+      pose = Eigen::Translation3d(0.01 + goal->x[i],
+                                  0.01 + goal->y[i],
+                                  0.0 + goal->z[i]) * rot;
 
       poses.push_back(pose);
     }

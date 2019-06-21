@@ -57,7 +57,7 @@ print('len(contours): ', len(contours))
 print('len(contours2): ', len(contours2))
 
 # 绘制轮廓
-cv2.drawContours(im, contours, 1 , (255, 0, 0), 3)
+cv2.drawContours(im, contours, -1 , (255, 0, 0), 3)
 
 # 显示图片
 cv2.imshow('drawContours', im)

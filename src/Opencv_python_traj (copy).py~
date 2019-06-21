@@ -1,0 +1,73 @@
+# -*- coding: utf-8 -*-
+
+import cv2
+import numpy as np
+ 
+img = cv2.imread('../data/sofsk.png',0)
+size = np.size(img)
+cv2.imshow('sofsk', img)
+skel = np.zeros(img.shape,np.uint8)
+print(size)
+print('cv2')
+print(cv2.countNonZero(img))
+ret,img = cv2.threshold(img,127,255,0)
+element = cv2.getStructuringElement(cv2.MORPH_CROSS,(3,3))
+done = False
+
+while(not done):
+    eroded = cv2.erode(img,element)
+    temp = cv2.dilate(eroded,element)
+    temp = cv2.subtract(img,temp)
+    skel = cv2.bitwise_or(skel,temp)
+    img = eroded.copy()
+ 
+    zeros = size - cv2.countNonZero(img)
+    if zeros==size:
+        done = True
+
+print(cv2.countNonZero(skel))
+cv2.imshow("skel",skel)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+'''
+im = cv2.imread('../data/5.png')
+print("image shape: ",im.shape)
+print("image shape: ",im.shape)
+imgray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
+
+
+# 查找轮廓
+ret, thresh = cv2.threshold(imgray, 244, 255, 0)
+img, contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+#过滤太小的contour
+contours2=[cnt for cnt in contours if cv2.contourArea(cnt)>200]
+
+# 打印轮廓信息
+# print('len(contours): ', len(contours))
+# print('len(contours2): ', len(contours2))
+# print("contours2[9] type: ", type(contours2[9]))
+# print('len(contours2[9]): ', len(contours2[9]))
+# print("contours2[9] shape: ", np.array(contours2[9]).shape)
+
+# # 二维数组去重
+x_y_list = [c for c in contours2[0].flatten()]
+x_y_list = [round(c/1000.0,2) for c in contours2[0].flatten()]
+x_y_list_m = np.array(x_y_list).reshape(len(contours2[0]),2)
+
+# # x，y 坐标列表
+x_list = (x_y_list_m.flatten(1)[:len(contours2[0])])
+
+print(x_list)
+print(len(x_list))
+
+# 绘制轮廓
+cv2.drawContours(im, contours2, 0 , (255, 0, 0), 3)
+
+# 显示图片
+cv2.imshow('drawContours', im)
+
+# 等待退出
+if cv2.waitKey(0) & 0xff == ord('q'):
+    cv2.destroyAllWindows()
+'''
