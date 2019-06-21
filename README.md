@@ -1,8 +1,8 @@
-#Prepare for generate traj:
+# Prepare for generate traj:
 
 topic service action 3 different way have different advantages and disadvantage which we should take care of.
 
-##Test(in 3 individual terminal):
+## Test(in 3 individual terminal):
 
 1. a simple test for srv
 $ roscore
